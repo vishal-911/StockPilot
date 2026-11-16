@@ -2,7 +2,8 @@
 import type { CreateItemFormValues } from "@/types/items.types";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 // Get all active items
 export const getAllItems = async () => {
