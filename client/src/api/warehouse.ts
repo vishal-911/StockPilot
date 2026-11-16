@@ -1,0 +1,27 @@
+
+import type { CreateWarehouseFormValues } from "@/types/warehouse.types";
+import axios from "axios";
+
+const BASE_URL = "http://localhost:3000";
+
+export interface WarehouseInventoryItem {
+  item_id: number;
+  name: string;
+  sku: string;
+  reorder_threshold: number;
+  current_stock: number;
+}
+
+export const createWarehouse = async (data: CreateWarehouseFormValues) => {
+  const response = await axios.post(`${BASE_URL}/warehouses`, data);
+  return response.data;
+};
+
+export const getWarehouseInventory = async (
+  warehouseId: number
+): Promise<WarehouseInventoryItem[]> => {
+  const response = await axios.get<WarehouseInventoryItem[]>(
+    `${BASE_URL}/stock/warehouse-inventory/${warehouseId}`
+  );
+  return response.data;
+};
